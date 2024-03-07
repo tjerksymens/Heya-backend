@@ -16,13 +16,13 @@ import { AppService } from './app.service';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get('MONGODB', 'mongodb://localhost:27017'),
+        uri: configService.get<string>('MONGODB_URI', 'mongodb://localhost:27017/heya'),
       }),
       inject: [ConfigService],
     }),
-    UserModule, 
-    RoomModule, 
-    OwnerModule
+    UserModule,
+    RoomModule,
+    OwnerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

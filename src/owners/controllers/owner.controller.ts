@@ -4,7 +4,9 @@ import { OwnerService } from './../services/owner.service';
 @Controller()
 @Dependencies(OwnerService)
 export class OwnerController {
-  constructor(ownerService) {
+  private ownerService: OwnerService;
+
+  constructor(ownerService: OwnerService) { 
     this.ownerService = ownerService;
   }
 

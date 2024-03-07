@@ -4,7 +4,9 @@ import { UserService } from './../services/user.service';
 @Controller()
 @Dependencies(UserService)
 export class UserController {
-  constructor(userService) {
+  private userService: UserService; 
+
+  constructor(userService: UserService) {
     this.userService = userService;
   }
 

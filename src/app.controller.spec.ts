@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 describe('AppController', () => {
-  let appController;
+  let appController: AppController;
 
   beforeEach(async () => {
     const app = await Test.createTestingModule({
