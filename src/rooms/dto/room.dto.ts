@@ -1,4 +1,4 @@
-class RoomDto {
+export class RoomDto {
   title: string;
   members: string[];
 
