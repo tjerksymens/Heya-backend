@@ -1,5 +1,5 @@
 import { Controller, Dependencies, Get } from '@nestjs/common';
-import { OwnerService } from './../services/owner.service';
+import { OwnerService } from '../services';
 
 @Controller()
 @Dependencies(OwnerService)

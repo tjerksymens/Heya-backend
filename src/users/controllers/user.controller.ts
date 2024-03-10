@@ -1,8 +1,8 @@
 import { Body, Controller, Dependencies, Get, Post } from '@nestjs/common';
 import { UserService } from '../services';
-import { UserDto } from '../dto/user.dto';
+import { UserDto } from '../dto';
 
-@Controller()
+@Controller('users')
 @Dependencies(UserService)
 export class UserController {
   private userService: UserService; 
@@ -11,7 +11,7 @@ export class UserController {
     this.userService = userService;
   }
 
-  @Get('users')
+  @Get()
   getAll() {
     return this.userService.getAll();
   }
