@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../schema/user.shema';
+import { User } from '../schema';
 
 interface UserData {
   name: string;
