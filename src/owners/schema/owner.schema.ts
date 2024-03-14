@@ -10,5 +10,5 @@ export class Owner {
     public contact: string;
 }
 
-export type UserDocument = Owner & Document;
-export const UserSchema = SchemaFactory.createForClass(Owner);
+export type OwnerDocument = Owner & Document;
+export const OwnerSchema = SchemaFactory.createForClass(Owner);
