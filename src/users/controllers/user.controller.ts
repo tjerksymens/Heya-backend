@@ -1,23 +1,46 @@
-import { Body, Controller, Dependencies, Get, Post } from '@nestjs/common';
-import { UserService } from '../services';
+import { Body, Controller, HttpCode, HttpStatus, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { UserDto } from '../dto';
+import { UserService } from '../services';
 
 @Controller('users')
-@Dependencies(UserService)
 export class UserController {
-  private userService: UserService; 
+    public constructor(private userService: UserService) {}
 
-  constructor(userService: UserService) {
-    this.userService = userService;
-  }
+    @Get()
+    @ApiOperation({ summary: 'Get all users' })
+    @ApiResponse({ status: HttpStatus.OK, type: [UserDto] })
+    public getAllUsers() {
+        return this.userService.getAllUsers();
+    }
 
-  @Get()
-  getAll() {
-    return this.userService.getAll();
-  }
+    @Get(':id')
+    @ApiOperation({ summary: 'Get user by id' })
+    @ApiResponse({ status: HttpStatus.OK, type: UserDto })
+    public getUserById(@Param('id') id: string) {
+        return this.userService.getUser(id);
+    }
 
-  @Post()
-  createUser(@Body() userData: UserDto) {
-    return this.userService.createUser(userData);
-  }
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
+    @ApiOperation({ summary: 'Create a user' })
+    @ApiResponse({ status: HttpStatus.CREATED, description: 'The user has been successfully created' })
+    public async createUser(@Body() userDto: UserDto) {
+        return this.userService.createUser(userDto);
+    }
+
+    @Put(':id')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Update a user' })
+    @ApiResponse({ status: HttpStatus.OK, description: 'The user has been successfully updated' })
+    public async updateCost(@Param('id') id: string, @Body() cost: UserDto) {
+        return this.userService.updateUser(id, cost);
+    }
+
+    @Delete(':id')
+    @ApiOperation({ summary: 'Delete a user' })
+    @ApiResponse({ status: HttpStatus.OK, description: 'The user has been successfully deleted' })
+    public async deleteCost(@Param('id') id: string) {
+        return this.userService.deleteUser(id);
+    }
 }
