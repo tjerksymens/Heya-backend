@@ -1,5 +1,11 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 export class OwnerDto {
-    name: string;
-    email: string;
+    @ApiProperty()
+    @IsString()
+    public name: string;
+
+    @ApiProperty()
+    @IsString()
+    public email: string;
 }
-  

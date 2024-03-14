@@ -33,14 +33,14 @@ export class UserController {
     @HttpCode(HttpStatus.OK)
     @ApiOperation({ summary: 'Update a user' })
     @ApiResponse({ status: HttpStatus.OK, description: 'The user has been successfully updated' })
-    public async updateCost(@Param('id') id: string, @Body() cost: UserDto) {
-        return this.userService.updateUser(id, cost);
+    public async updateUser(@Param('id') id: string, @Body() user: UserDto) {
+        return this.userService.updateUser(id, user);
     }
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete a user' })
     @ApiResponse({ status: HttpStatus.OK, description: 'The user has been successfully deleted' })
-    public async deleteCost(@Param('id') id: string) {
+    public async deleteUser(@Param('id') id: string) {
         return this.userService.deleteUser(id);
     }
 }
