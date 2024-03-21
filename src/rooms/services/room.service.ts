@@ -33,6 +33,14 @@ export class RoomService {
         return updatedRoom;
     }
 
+    public async updateRoomPart(id: string, roomData: RoomDto): Promise<Room> {
+        const updatedRoom = await this.roomModel.findByIdAndUpdate(id, roomData, { new: true }).exec();
+        if (!updatedRoom) {
+            throw new NotFoundException(`room with ID ${id} not found.`);
+        }
+        return updatedRoom;
+    }
+
     public async deleteRoom(id: string): Promise<void> {
         const result = await this.roomModel.findByIdAndDelete(id).exec();
         if (!result) {

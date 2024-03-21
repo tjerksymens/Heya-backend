@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Get, Post, Put, Delete, Param, Patch } from '@nestjs/common';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { RoomDto } from '../dto';
 import { RoomService } from '../services';
@@ -35,6 +35,14 @@ export class RoomController {
     @ApiResponse({ status: HttpStatus.OK, description: 'The room has been successfully updated' })
     public async updateRoom(@Param('id') id: string, @Body() cost: RoomDto) {
         return this.roomService.updateRoom(id, cost);
+    }
+
+    @Patch(':id')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Update a room' })
+    @ApiResponse({ status: HttpStatus.OK, description: 'The room has been successfully updated' })
+    public async updateRoomPart(@Param('id') id: string, @Body() cost: RoomDto) {
+        return this.roomService.updateRoomPart(id, cost);
     }
 
     @Delete(':id')
