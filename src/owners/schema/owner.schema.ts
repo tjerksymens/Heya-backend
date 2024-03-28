@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { GenderEnum } from '../enums';
+import { GenderEnum } from '../../shared';
 import { Room } from '../../rooms/schema';
 
 @Schema()
@@ -26,8 +26,8 @@ export class Owner {
     @Prop({ required: false, nullable: true })
     public phoneNumber: string;
 
-    @Prop({ required: true, type: Types.ObjectId, ref: 'Room' })
-    public owner: Room;
+    @Prop({ required: true, type: Types.ObjectId, ref: 'Rooms' })
+    public owner: Room[];
 }
 
 export type OwnerDocument = Owner & Document;

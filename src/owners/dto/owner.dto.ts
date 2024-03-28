@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsString } from 'class-validator';
-import { GenderEnum } from '../enums';
+import { GenderEnum } from '../../shared';
 export class OwnerDto {
     @ApiProperty()
     @IsString()
