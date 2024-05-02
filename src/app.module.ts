@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RoomModule } from './rooms/room.module';
 import { OwnerModule } from './owners/owner.module';
 import { UserModule } from './users/user.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
     imports: [
         ConfigModule.forRoot({
@@ -17,6 +18,7 @@ import { UserModule } from './users/user.module';
             }),
             inject: [ConfigService],
         }),
+        AuthModule,
         RoomModule,
         OwnerModule,
         UserModule,

@@ -17,12 +17,6 @@ export class Owner {
     @Prop({ required: false, nullable: true, type: 'date' })
     public birthday: string;
 
-    @Prop({ required: true })
-    public email: string;
-
-    @Prop({ required: true })
-    public password: string;
-
     @Prop({ required: false, nullable: true })
     public phoneNumber: string;
 
