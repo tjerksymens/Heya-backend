@@ -2,9 +2,13 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 import { GenderEnum } from '../../shared';
 import { Room } from '../../rooms/schema';
+import { Auth } from '../../auth/schema';
 
 @Schema()
 export class User {
+    @Prop({ required: true, type: Types.ObjectId, ref: 'Auth' })
+    public auth: Auth;
+
     @Prop({ required: true })
     public firstName: string;
 
@@ -16,12 +20,6 @@ export class User {
 
     @Prop({ required: false, nullable: true, type: 'date' })
     public birthday: string;
-
-    @Prop({ required: true })
-    public email: string;
-
-    @Prop({ required: true })
-    public password: string;
 
     @Prop({ required: false, nullable: true })
     public phoneNumber: string;

@@ -4,6 +4,10 @@ import { GenderEnum } from '../../shared';
 export class UserDto {
     @ApiProperty()
     @IsString()
+    public auth: string;
+
+    @ApiProperty()
+    @IsString()
     public firstName: string;
 
     @ApiProperty()
@@ -17,14 +21,6 @@ export class UserDto {
     @ApiProperty()
     @IsDateString()
     public birthday: string;
-
-    @ApiProperty()
-    @IsString()
-    public email: string;
-
-    @ApiProperty()
-    @IsString()
-    public password: string;
 
     @ApiProperty()
     @IsString()
