@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, BadRequestException } from '@nestjs/common';
 import { Auth } from './schema/auth.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
@@ -18,7 +18,15 @@ export class AuthService {
     public async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
         const { name, email, password } = signUpDto;
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        if (!this.isPasswordValid(password)) {
+            throw new BadRequestException('Password does not meet complexity requirements');
+        }
+
+        if (!this.isEmailValid(email)) {
+            throw new BadRequestException('Invalid email address');
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 13);
 
         const user = await this.authModel.create({
             name,
@@ -29,6 +37,16 @@ export class AuthService {
         const token = this.jwtService.sign({ id: user._id });
 
         return { token };
+    }
+
+    private isPasswordValid(password: string): boolean {
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
+        return passwordRegex.test(password);
+    }
+
+    private isEmailValid(email: string): boolean {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     }
 
     public async login(loginDto: LoginDto): Promise<{ token: string }> {
