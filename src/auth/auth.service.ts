@@ -26,6 +26,11 @@ export class AuthService {
             throw new BadRequestException('Invalid email address');
         }
 
+        const existingUser = await this.authModel.findOne({ email });
+        if (existingUser) {
+            throw new BadRequestException('Email already exists');
+        }
+
         const hashedPassword = await bcrypt.hash(password, 13);
 
         const user = await this.authModel.create({
