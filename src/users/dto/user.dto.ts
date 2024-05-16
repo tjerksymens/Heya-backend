@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsArray, IsBoolean, IsDateString, IsEnum, IsString } from 'class-validator';
 import { GenderEnum } from '../../shared';
 export class UserDto {
@@ -26,27 +26,27 @@ export class UserDto {
     @IsString()
     public phoneNumber: string;
 
-    @ApiProperty()
+    @ApiPropertyOptional()
     @IsString()
-    public imageLink: string;
+    public imageLink?: string;
 
     @ApiProperty()
     @IsBoolean()
     public rentsRoom: boolean;
 
-    @ApiProperty()
+    @ApiPropertyOptional()
     @IsString()
-    public room: string;
+    public room?: string;
 
-    @ApiProperty()
+    @ApiPropertyOptional()
     @IsArray()
-    public userStayInfo: string[];
+    public userStayInfo?: string[];
 
-    @ApiProperty()
+    @ApiPropertyOptional()
     @IsArray()
-    public userInfo: string[];
+    public userInfo?: string[];
 
-    @ApiProperty()
+    @ApiPropertyOptional()
     @IsArray()
-    public userExpectations: string[];
+    public userExpectations?: string[];
 }
