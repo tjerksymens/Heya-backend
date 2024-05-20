@@ -5,6 +5,9 @@ import { RoomModule } from './rooms/room.module';
 import { OwnerModule } from './owners/owner.module';
 import { UserModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
+import { UploadController } from './cloudinary/cloudinary.controller';
+import { CloudinaryService } from './cloudinary/cloudinary.service';
+import { MulterModule } from '@nestjs/platform-express';
 @Module({
     imports: [
         ConfigModule.forRoot({
@@ -22,8 +25,11 @@ import { AuthModule } from './auth/auth.module';
         RoomModule,
         OwnerModule,
         UserModule,
+        MulterModule.register({
+            dest: './uploads',
+        }),
     ],
-    controllers: [],
-    providers: [],
+    controllers: [UploadController],
+    providers: [CloudinaryService],
 })
 export class AppModule {}
