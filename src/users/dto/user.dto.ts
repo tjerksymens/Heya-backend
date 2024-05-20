@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsArray, IsBoolean, IsDateString, IsEnum, IsString } from 'class-validator';
 import { GenderEnum } from '../../shared';
-export class UserDto {
+export class SaveUserDto {
     @ApiProperty()
     @IsString()
     public auth: string;
@@ -49,4 +49,10 @@ export class UserDto {
     @ApiPropertyOptional()
     @IsArray()
     public userExpectations?: string[];
+}
+
+export class UserDto extends SaveUserDto {
+    @ApiProperty()
+    @IsString()
+    public id: string;
 }

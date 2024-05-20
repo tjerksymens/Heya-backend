@@ -20,17 +20,24 @@ export class UserService {
         return user;
     }
 
-    public async createUser(userData: UserDto): Promise<User> {
-        const newUser = new this.userModel(userData);
-        return newUser.save();
+    public async createUser(userData: UserDto): Promise<UserDto> {
+        const existingUser = await this.userModel.findOne({ auth: userData.auth }).exec();
+
+        if (existingUser) {
+            return this.updateUser(existingUser.id, userData);
+        } else {
+            const newUser = new this.userModel(userData);
+            const createdUser = await newUser.save();
+            return createdUser.toObject();
+        }
     }
 
-    public async updateUser(id: string, userData: UserDto): Promise<User> {
+    public async updateUser(id: string, userData: UserDto): Promise<UserDto> {
         const updatedUser = await this.userModel.findByIdAndUpdate(id, userData, { new: true }).exec();
         if (!updatedUser) {
             throw new NotFoundException(`User with ID ${id} not found.`);
         }
-        return updatedUser;
+        return updatedUser.toObject();
     }
 
     public async deleteUser(id: string): Promise<void> {
