@@ -13,7 +13,14 @@ export class CloudinaryService {
     }
 
     public async uploadImage(file: Express.Multer.File): Promise<string> {
-        const result = await cloudinary.uploader.upload(file.path);
-        return result.secure_url;
+        return new Promise((resolve, reject) => {
+            const upload_stream = cloudinary.uploader.upload_stream((error, result) => {
+                if (error) {
+                    return reject(error);
+                }
+                resolve(result.secure_url);
+            });
+            upload_stream.end(file.buffer);
+        });
     }
 }

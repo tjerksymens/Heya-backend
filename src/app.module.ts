@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { UploadController } from './cloudinary/cloudinary.controller';
 import { CloudinaryService } from './cloudinary/cloudinary.service';
 import { MulterModule } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
+
 @Module({
     imports: [
         ConfigModule.forRoot({
@@ -26,7 +28,7 @@ import { MulterModule } from '@nestjs/platform-express';
         OwnerModule,
         UserModule,
         MulterModule.register({
-            dest: './uploads',
+            storage: memoryStorage(),
         }),
     ],
     controllers: [UploadController],
