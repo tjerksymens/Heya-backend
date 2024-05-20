@@ -18,7 +18,11 @@ export class CloudinaryService {
                 if (error) {
                     return reject(error);
                 }
-                resolve(result.secure_url);
+                if (result && result.secure_url) {
+                    resolve(result.secure_url);
+                } else {
+                    reject(new Error('Upload failed: No secure_url returned from Cloudinary.'));
+                }
             });
             upload_stream.end(file.buffer);
         });
