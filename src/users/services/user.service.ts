@@ -20,6 +20,14 @@ export class UserService {
         return user;
     }
 
+    public async getUserByAuth(auth: string): Promise<User> {
+        const user = await this.userModel.findOne({ auth }).exec();
+        if (!user) {
+            throw new NotFoundException(`User with auth ${auth} not found.`);
+        }
+        return user;
+    }
+
     public async createUser(userData: UserDto): Promise<UserDto> {
         const existingUser = await this.userModel.findOne({ auth: userData.auth }).exec();
 

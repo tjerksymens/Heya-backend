@@ -21,6 +21,13 @@ export class UserController {
         return this.userService.getUser(id);
     }
 
+    @Get('auth/:auth')
+    @ApiOperation({ summary: 'Get user by auth' })
+    @ApiResponse({ status: HttpStatus.OK, type: UserDto })
+    public getUserByAuth(@Param('auth') auth: string) {
+        return this.userService.getUserByAuth(auth);
+    }
+
     @Post()
     @HttpCode(HttpStatus.CREATED)
     @ApiOperation({ summary: 'Create a user' })
