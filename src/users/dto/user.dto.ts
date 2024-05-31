@@ -49,6 +49,10 @@ export class SaveUserDto {
     @ApiPropertyOptional()
     @IsArray()
     public userExpectations?: string[];
+
+    @ApiPropertyOptional()
+    @IsArray()
+    public preferredAccommodation?: string[];
 }
 
 export class UserDto extends SaveUserDto {

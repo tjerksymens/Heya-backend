@@ -41,6 +41,9 @@ export class User {
 
     @Prop({ required: false, nullable: true })
     public userExpectations: string[];
+
+    @Prop({ required: false, nullable: true })
+    public preferredAccommodation: string[];
 }
 
 export type UserDocument = User & Document;
