@@ -48,6 +48,14 @@ export class UserService {
         return updatedUser.toObject();
     }
 
+    public async patchUser(id: string, userData: Partial<UserDto>): Promise<UserDto> {
+        const updatedUser = await this.userModel.findByIdAndUpdate(id, { $set: userData }, { new: true }).exec();
+        if (!updatedUser) {
+            throw new NotFoundException(`User with ID ${id} not found.`);
+        }
+        return updatedUser.toObject();
+    }
+
     public async deleteUser(id: string): Promise<void> {
         const result = await this.userModel.findByIdAndDelete(id).exec();
         if (!result) {

@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Get, Post, Put, Delete, Param, Patch } from '@nestjs/common';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { UserDto } from '../dto';
 import { UserService } from '../services';
@@ -42,6 +42,14 @@ export class UserController {
     @ApiResponse({ status: HttpStatus.OK, description: 'The user has been successfully updated' })
     public async updateUser(@Param('id') id: string, @Body() user: UserDto) {
         return this.userService.updateUser(id, user);
+    }
+
+    @Patch(':id')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Partially update a user' })
+    @ApiResponse({ status: HttpStatus.OK, description: 'The user has been successfully updated' })
+    public async patchUser(@Param('id') id: string, @Body() user: Partial<UserDto>) {
+        return this.userService.patchUser(id, user);
     }
 
     @Delete(':id')
