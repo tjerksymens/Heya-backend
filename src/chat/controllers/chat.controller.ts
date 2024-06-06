@@ -21,7 +21,7 @@ export class ChatController {
         return this.chatService.getMessagesByUserId(userId);
     }
 
-    @Get('sent/:sentToUserId')
+    @Get('sent-to/:sentToUserId')
     @ApiOperation({ summary: 'Get messages by sent to user id' })
     @ApiResponse({ status: HttpStatus.OK, type: [MessageDto] })
     public async getMessagesBySentToUserId(@Param('sentToUserId') sentToUserId: string): Promise<MessageDto[]> {
