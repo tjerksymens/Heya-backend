@@ -18,13 +18,18 @@ export class ChatService {
         return messages.map((message) => this.convertToDto(message));
     }
 
+    public async getMessagesSentToUserId(sentToUserId: string): Promise<MessageDto[]> {
+        const messages = await this.messageModel.find({ sentToUserId }).exec();
+        return messages.map((message) => this.convertToDto(message));
+    }
+
     public async saveMessage(saveMessageDto: SaveMessageDto): Promise<MessageDto> {
         const savedMessage = await this.messageModel.create(saveMessageDto);
         return this.convertToDto(savedMessage);
     }
 
     private convertToDto(message: MessageDocument): MessageDto {
-        const { _id, userId, content, timestamp } = message;
-        return { id: _id.toString(), userId, content, timestamp };
+        const { _id, userId, sentToUserID, content, timestamp } = message;
+        return { id: _id.toString(), userId, sentToUserID, content, timestamp };
     }
 }

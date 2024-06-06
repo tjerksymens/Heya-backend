@@ -14,11 +14,18 @@ export class ChatController {
         return this.chatService.getMessages();
     }
 
-    @Get(':userId')
+    @Get('get/:userId')
     @ApiOperation({ summary: 'Get messages by user id' })
     @ApiResponse({ status: HttpStatus.OK, type: [MessageDto] })
     public async getMessagesByUserId(@Param('userId') userId: string): Promise<MessageDto[]> {
         return this.chatService.getMessagesByUserId(userId);
+    }
+
+    @Get('sent/:sentToUserId')
+    @ApiOperation({ summary: 'Get messages by sent to user id' })
+    @ApiResponse({ status: HttpStatus.OK, type: [MessageDto] })
+    public async getMessagesBySentToUserId(@Param('sentToUserId') sentToUserId: string): Promise<MessageDto[]> {
+        return this.chatService.getMessagesSentToUserId(sentToUserId);
     }
 
     @Post()
