@@ -9,6 +9,9 @@ export class Message {
     public userId: string;
 
     @Prop({ required: true })
+    public sentToUserID: string;
+
+    @Prop({ required: true })
     public content: string;
 
     @Prop({ default: Date.now })
