@@ -7,7 +7,7 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { ChatService } from './services';
-import { CreateMessageDto } from './dto';
+import { SaveMessageDto } from './dto';
 
 @WebSocketGateway({ cors: true })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
@@ -24,8 +24,8 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
 
     @SubscribeMessage('sendMessage')
-    public async handleMessage(client: Socket, payload: CreateMessageDto): Promise<void> {
-        const message = await this.chatService.createMessage(payload);
+    public async handleMessage(client: Socket, payload: SaveMessageDto): Promise<void> {
+        const message = await this.chatService.saveMessage(payload);
         this.server.emit('receiveMessage', message);
     }
 }
