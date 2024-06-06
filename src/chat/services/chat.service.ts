@@ -29,7 +29,7 @@ export class ChatService {
     }
 
     private convertToDto(message: MessageDocument): MessageDto {
-        const { _id, userId, sentToUserID, content, timestamp } = message;
-        return { id: _id.toString(), userId, sentToUserID, content, timestamp };
+        const { _id, userId, sentToUserId, content, timestamp } = message;
+        return { id: _id.toString(), userId, sentToUserId, content, timestamp };
     }
 }

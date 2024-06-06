@@ -9,7 +9,7 @@ export class Message {
     public userId: string;
 
     @Prop({ required: true })
-    public sentToUserID: string;
+    public sentToUserId: string;
 
     @Prop({ required: true })
     public content: string;

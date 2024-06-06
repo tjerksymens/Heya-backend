@@ -8,7 +8,7 @@ export class SaveMessageDto {
 
     @ApiProperty()
     @IsString()
-    public sentToUserID: string;
+    public sentToUserId: string;
 
     @ApiProperty()
     @IsString()
