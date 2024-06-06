@@ -1530,18 +1530,7 @@
     socket.io "4.7.5"
     tslib "2.6.2"
 
-"@nestjs/schematics@^10.0.1":
-  version "10.1.1"
-  resolved "https://registry.npmjs.org/@nestjs/schematics/-/schematics-10.1.1.tgz"
-  integrity sha512-o4lfCnEeIkfJhGBbLZxTuVWcGuqDCFwg5OrvpgRUBM7vI/vONvKKiB5riVNpO+JqXoH0I42NNeDb0m4V5RREig==
-  dependencies:
-    "@angular-devkit/core" "17.1.2"
-    "@angular-devkit/schematics" "17.1.2"
-    comment-json "4.2.3"
-    jsonc-parser "3.2.1"
-    pluralize "8.0.0"
-
-"@nestjs/schematics@^10.1.1":
+"@nestjs/schematics@^10.0.1", "@nestjs/schematics@^10.1.1":
   version "10.1.1"
   resolved "https://registry.yarnpkg.com/@nestjs/schematics/-/schematics-10.1.1.tgz#a67fb178a7ad6025ccc3314910b077ac454fcdf3"
   integrity sha512-o4lfCnEeIkfJhGBbLZxTuVWcGuqDCFwg5OrvpgRUBM7vI/vONvKKiB5riVNpO+JqXoH0I42NNeDb0m4V5RREig==
