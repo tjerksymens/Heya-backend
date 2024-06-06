@@ -13,7 +13,7 @@ export class Message {
     public content: string;
 
     @Prop({ default: Date.now })
-    public timestamp: Date;
+    public timestamp: string;
 }
 
 export type MessageDocument = Message & Document;

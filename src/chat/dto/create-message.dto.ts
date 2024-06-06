@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDateString, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
+import { User } from '../../users/schema'; // Import the User DTO if not imported already
 
 export class SaveMessageDto {
     @ApiProperty()
@@ -15,12 +16,18 @@ export class SaveMessageDto {
     public content: string;
 
     @ApiProperty()
-    @IsDateString()
-    public timestamp: Date;
+    @IsString()
+    public timestamp: string;
 }
 
 export class MessageDto extends SaveMessageDto {
     @ApiProperty()
     @IsString()
     public id: string;
+
+    @ApiProperty()
+    public sender: User;
+
+    @ApiProperty()
+    public receiver: User;
 }

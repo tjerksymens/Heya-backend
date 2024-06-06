@@ -7,11 +7,11 @@ import { ChatService } from '../services';
 export class ChatController {
     public constructor(private chatService: ChatService) {}
 
-    @Get()
+    @Get('all/:userId')
     @ApiOperation({ summary: 'Get messages' })
     @ApiResponse({ status: HttpStatus.OK, type: [MessageDto] })
-    public async getMessages(): Promise<MessageDto[]> {
-        return this.chatService.getMessages();
+    public async getMessages(@Param('userId') userId: string): Promise<MessageDto[]> {
+        return this.chatService.getAllMessagesForUser(userId);
     }
 
     @Get('get/:userId')
