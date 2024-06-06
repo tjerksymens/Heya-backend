@@ -16,19 +16,25 @@ export class ChatService {
         const messages = await this.messageModel.find().exec();
         return Promise.all(
             messages.map(async (message) => {
-                const userId = message.userId.toString();
-                const user = await this.userService.getUser(userId);
-                return { ...message.toObject(), user };
+                const sender = await this.userService.getUser(message.userId);
+                const receiver = await this.userService.getUser(message.sentToUserId);
+                return { ...message.toObject(), sender, receiver };
             }),
         );
     }
 
     public async getMessagesByUserId(userId: string): Promise<MessageDto[]> {
-        const messages = await this.messageModel.find({ userId }).exec();
+        const messages = await this.messageModel
+            .find({
+                $or: [{ userId }, { sentToUserId: userId }],
+            })
+            .exec();
+
         return Promise.all(
             messages.map(async (message) => {
-                const user = await this.userService.getUser(userId);
-                return { ...message.toObject(), user };
+                const sender = await this.userService.getUser(message.userId);
+                const receiver = await this.userService.getUser(message.sentToUserId);
+                return { ...message.toObject(), sender, receiver };
             }),
         );
     }
@@ -37,14 +43,27 @@ export class ChatService {
         const messages = await this.messageModel.find({ sentToUserId }).exec();
         return Promise.all(
             messages.map(async (message) => {
-                const user = await this.userService.getUser(sentToUserId);
-                return { ...message.toObject(), user };
+                const sender = await this.userService.getUser(message.userId);
+                const receiver = await this.userService.getUser(message.sentToUserId);
+                return { ...message.toObject(), sender, receiver };
             }),
         );
     }
 
     public async saveMessage(saveMessageDto: SaveMessageDto): Promise<MessageDto> {
-        const message = await this.messageModel.create(saveMessageDto);
+        const { userId, sentToUserId } = saveMessageDto;
+
+        const [sender, receiver] = await Promise.all([
+            this.userService.getUser(userId),
+            this.userService.getUser(sentToUserId),
+        ]);
+
+        const message = await this.messageModel.create({
+            ...saveMessageDto,
+            sender,
+            receiver,
+        });
+
         return message.toObject();
     }
 }

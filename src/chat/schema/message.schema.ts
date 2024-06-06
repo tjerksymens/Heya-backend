@@ -1,14 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
-import { UserDocument } from '../../users/schema';
+import { Document } from 'mongoose';
 
 @Schema()
 export class Message {
-    @Prop({ required: true, type: Types.ObjectId, ref: 'Users' })
-    public userId: UserDocument;
+    @Prop({ required: true, type: String })
+    public userId: string;
 
-    @Prop({ required: true, type: Types.ObjectId, ref: 'Users' })
-    public sentToUserId: UserDocument;
+    @Prop({ required: true, type: String })
+    public sentToUserId: string;
 
     @Prop({ required: true })
     public content: string;
