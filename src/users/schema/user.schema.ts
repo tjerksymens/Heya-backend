@@ -5,7 +5,7 @@ import { Room } from '../../rooms/schema';
 import { Auth } from '../../auth/schema';
 
 @Schema()
-export class User {
+export class User extends Document {
     @Prop({ required: true, type: Types.ObjectId, ref: 'Auth' })
     public auth: Auth;
 
@@ -46,5 +46,4 @@ export class User {
     public preferredAccommodation: string[];
 }
 
-export type UserDocument = User & Document;
 export const UserSchema = SchemaFactory.createForClass(User);

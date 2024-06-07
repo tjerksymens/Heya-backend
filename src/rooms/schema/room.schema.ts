@@ -3,7 +3,7 @@ import { Document, Types } from 'mongoose';
 import { User } from '../../users/schema';
 import { Owner } from '../../owners/schema';
 @Schema()
-export class Room {
+export class Room extends Document {
     @Prop({ required: true })
     public title: string;
 

@@ -4,7 +4,7 @@ import { GenderEnum } from '../../shared';
 import { Room } from '../../rooms/schema';
 
 @Schema()
-export class Owner {
+export class Owner extends Document {
     @Prop({ required: true })
     public firstName: string;
 
@@ -24,5 +24,4 @@ export class Owner {
     public owner: Room[];
 }
 
-export type OwnerDocument = Owner & Document;
 export const OwnerSchema = SchemaFactory.createForClass(Owner);
