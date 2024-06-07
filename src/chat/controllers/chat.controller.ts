@@ -14,18 +14,24 @@ export class ChatController {
         return this.chatService.getAllMessagesForUser(userId);
     }
 
-    @Get('get/:userId')
-    @ApiOperation({ summary: 'Get messages by user id' })
+    @Get('all/:userId/:otherUserId')
+    @ApiOperation({ summary: 'Get messages between two users' })
     @ApiResponse({ status: HttpStatus.OK, type: [MessageDto] })
-    public async getMessagesByUserId(@Param('userId') userId: string): Promise<MessageDto[]> {
-        return this.chatService.getMessagesByUserId(userId);
+    public async getMessagesBetweenUsers(
+        @Param('userId') userId: string,
+        @Param('otherUserId') otherUserId: string,
+    ): Promise<MessageDto[]> {
+        return this.chatService.getAllMessagesBetweenUsers(userId, otherUserId);
     }
 
-    @Get('sent-to/:sentToUserId')
-    @ApiOperation({ summary: 'Get messages by sent to user id' })
+    @Get('recent/:userId')
+    @ApiOperation({ summary: 'Get most recent messages and load all messages with that user' })
     @ApiResponse({ status: HttpStatus.OK, type: [MessageDto] })
-    public async getMessagesBySentToUserId(@Param('sentToUserId') sentToUserId: string): Promise<MessageDto[]> {
-        return this.chatService.getMessagesSentToUserId(sentToUserId);
+    public async getMostRecentMessages(@Param('userId') userId: string): Promise<MessageDto[]> {
+        const mostRecentMessages = await this.chatService.getMostRecentMessages(userId);
+        const otherUserId =
+            mostRecentMessages[0]?.receiver?._id?.toString() || mostRecentMessages[0]?.sender?._id?.toString();
+        return this.chatService.getAllMessagesBetweenUsers(userId, otherUserId);
     }
 
     @Post()
