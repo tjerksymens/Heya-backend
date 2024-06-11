@@ -10,6 +10,7 @@ import { CloudinaryService } from './cloudinary/cloudinary.service';
 import { MulterModule } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import { ChatModule } from './chat/chat.module';
+import { CalendarModule } from './calendar/calendar.module';
 
 @Module({
     imports: [
@@ -29,6 +30,7 @@ import { ChatModule } from './chat/chat.module';
         OwnerModule,
         UserModule,
         ChatModule,
+        CalendarModule,
         MulterModule.register({
             storage: memoryStorage(),
         }),
