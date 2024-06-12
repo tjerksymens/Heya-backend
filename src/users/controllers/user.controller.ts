@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Get, Post, Put, Delete, Param, Patch } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Get, Post, Put, Delete, Param, Patch, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { UserDto } from '../dto';
 import { UserService } from '../services';
@@ -6,6 +6,13 @@ import { UserService } from '../services';
 @Controller('users')
 export class UserController {
     public constructor(private userService: UserService) {}
+
+    @Get('search')
+    @ApiOperation({ summary: 'Search users by name' })
+    @ApiResponse({ status: HttpStatus.OK, type: [UserDto] })
+    public async searchUsersByName(@Query('name') name: string) {
+        return this.userService.searchUsersByName(name);
+    }
 
     @Get()
     @ApiOperation({ summary: 'Get all users' })

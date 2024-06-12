@@ -62,4 +62,12 @@ export class UserService {
             throw new NotFoundException(`User with ID ${id} not found.`);
         }
     }
+
+    public async searchUsersByName(name: string): Promise<User[]> {
+        return this.userModel
+            .find({
+                $or: [{ firstName: { $regex: name, $options: 'i' } }, { lastName: { $regex: name, $options: 'i' } }],
+            })
+            .exec();
+    }
 }
