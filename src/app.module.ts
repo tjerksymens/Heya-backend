@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RoomModule } from './rooms/room.module';
-import { OwnerModule } from './owners/owner.module';
 import { UserModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
 import { UploadController } from './cloudinary/cloudinary.controller';
@@ -27,7 +26,6 @@ import { CalendarModule } from './calendar/calendar.module';
         }),
         AuthModule,
         RoomModule,
-        OwnerModule,
         UserModule,
         ChatModule,
         CalendarModule,

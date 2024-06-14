@@ -1,11 +1,28 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 import { User } from '../../users/schema';
-import { Owner } from '../../owners/schema';
 @Schema()
 export class Room extends Document {
+    @Prop({ required: true, type: Types.ObjectId, ref: 'User' + User.name })
+    public owner: User;
+
     @Prop({ required: true })
-    public title: string;
+    public streetname: string;
+
+    @Prop({ required: false })
+    public bus: string;
+
+    @Prop({ required: true })
+    public city: string;
+
+    @Prop({ required: true })
+    public postalCode: string;
+
+    @Prop({ required: true })
+    public place: string;
+
+    @Prop({ required: true })
+    public country: string;
 
     @Prop({ required: false, nullable: true })
     public description: string;
@@ -13,19 +30,19 @@ export class Room extends Document {
     @Prop({ required: false, nullable: true })
     public extraInfo: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     public furnished: boolean;
 
     @Prop({ required: false, nullable: true })
     public houseSize: number;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     public amountOfRooms: number;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     public whatIsShared: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     public whatIsPersonal: string;
 
     @Prop({ required: false, nullable: true })
@@ -40,25 +57,25 @@ export class Room extends Document {
     @Prop({ required: false, nullable: true })
     public kindOfPets: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     public imageLink: string;
 
-    @Prop({ required: true, type: 'date' })
+    @Prop({ required: false, type: 'date' })
     public startDateAvailability: string;
 
-    @Prop({ required: true, type: 'date' })
+    @Prop({ required: false, type: 'date' })
     public endDateAvailability: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     public rentPrice: number;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     public additionalCost: number;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     public serviceCost: number;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     public deposit: number;
 
     @Prop({ required: false, nullable: true })
@@ -66,9 +83,6 @@ export class Room extends Document {
 
     @Prop({ required: false, nullable: true })
     public privacyInfo: string[];
-
-    @Prop({ required: true, type: Types.ObjectId, ref: 'Owner' + Owner.name })
-    public owner: Owner;
 
     @Prop({ required: false, nullable: true, type: [{ type: Types.ObjectId, ref: 'User' + User.name }] })
     public members: User[];
