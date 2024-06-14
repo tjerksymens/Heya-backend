@@ -51,6 +51,9 @@ export class Room extends Document {
     @Prop({ required: false, nullable: true })
     public uniqueAboutPlace: string[];
 
+    @Prop({ required: false, nullable: true })
+    public images: string[];
+
     @Prop({ required: false, nullable: true, type: [{ type: Types.ObjectId, ref: 'User' + User.name }] })
     public members: User[];
 }

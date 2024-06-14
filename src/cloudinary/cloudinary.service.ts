@@ -16,9 +16,8 @@ export class CloudinaryService {
         return new Promise((resolve, reject) => {
             const upload_stream = cloudinary.uploader.upload_stream((error, result) => {
                 if (error) {
-                    return reject(error);
-                }
-                if (result && result.secure_url) {
+                    reject(error);
+                } else if (result && result.secure_url) {
                     resolve(result.secure_url);
                 } else {
                     reject(new Error('Upload failed: No secure_url returned from Cloudinary.'));
@@ -26,5 +25,10 @@ export class CloudinaryService {
             });
             upload_stream.end(file.buffer);
         });
+    }
+
+    public async uploadImages(files: Express.Multer.File[]): Promise<string[]> {
+        const uploadPromises = files.map((file) => this.uploadImage(file));
+        return Promise.all(uploadPromises);
     }
 }
