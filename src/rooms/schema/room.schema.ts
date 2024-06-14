@@ -12,6 +12,9 @@ export class Room extends Document {
     @Prop({ required: true })
     public streetname: string;
 
+    @Prop({ required: true })
+    public housenumber: number;
+
     @Prop({ required: false })
     public bus: string;
 
