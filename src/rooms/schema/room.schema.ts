@@ -7,6 +7,9 @@ export class Room extends Document {
     public owner: User;
 
     @Prop({ required: true })
+    public type: string;
+
+    @Prop({ required: true })
     public streetname: string;
 
     @Prop({ required: false })
