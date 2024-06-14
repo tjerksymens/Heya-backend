@@ -84,6 +84,36 @@ export class RoomDto {
     @IsOptional()
     public members: string[];
 
+    @ApiPropertyOptional()
+    @IsString()
+    @IsOptional()
+    public startDateAvailable: string;
+
+    @ApiPropertyOptional()
+    @IsString()
+    @IsOptional()
+    public endDateAvailable: string;
+
+    @ApiPropertyOptional()
+    @IsArray()
+    @IsOptional()
+    public pricing: string;
+
+    @ApiPropertyOptional()
+    @IsArray()
+    @IsOptional()
+    public idealAttendant: string;
+
+    @ApiPropertyOptional()
+    @IsArray()
+    @IsOptional()
+    public privacy: string;
+
+    @ApiPropertyOptional()
+    @IsString()
+    @IsOptional()
+    public meeting: string;
+
     public constructor(partial: Partial<RoomDto>) {
         Object.assign(this, partial);
     }
