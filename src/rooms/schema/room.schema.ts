@@ -10,10 +10,10 @@ export class Room extends Document {
     public type: string;
 
     @Prop({ required: true })
-    public streetname: string;
+    public streetName: string;
 
     @Prop({ required: true })
-    public housenumber: number;
+    public houseNumber: number;
 
     @Prop({ required: false })
     public bus: string;
