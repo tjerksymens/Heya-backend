@@ -34,61 +34,22 @@ export class Room extends Document {
     public description: string;
 
     @Prop({ required: false, nullable: true })
-    public extraInfo: string;
-
-    @Prop({ required: false })
-    public furnished: boolean;
+    public householdDetails: string[];
 
     @Prop({ required: false, nullable: true })
-    public houseSize: number;
-
-    @Prop({ required: false })
-    public amountOfRooms: number;
-
-    @Prop({ required: false })
-    public whatIsShared: string;
-
-    @Prop({ required: false })
-    public whatIsPersonal: string;
+    public propertyDetails: string[];
 
     @Prop({ required: false, nullable: true })
-    public amountOfStudents: number;
+    public sharedSpaces: string[];
 
     @Prop({ required: false, nullable: true })
-    public PeopleLivingHere: number;
+    public roomDetails: string[];
 
     @Prop({ required: false, nullable: true })
-    public areTherePets: boolean;
+    public personalRoomDetails: string[];
 
     @Prop({ required: false, nullable: true })
-    public kindOfPets: string;
-
-    @Prop({ required: false })
-    public imageLink: string;
-
-    @Prop({ required: false, type: 'date' })
-    public startDateAvailability: string;
-
-    @Prop({ required: false, type: 'date' })
-    public endDateAvailability: string;
-
-    @Prop({ required: false })
-    public rentPrice: number;
-
-    @Prop({ required: false })
-    public additionalCost: number;
-
-    @Prop({ required: false })
-    public serviceCost: number;
-
-    @Prop({ required: false })
-    public deposit: number;
-
-    @Prop({ required: false, nullable: true })
-    public idealAttendantInfo: string[];
-
-    @Prop({ required: false, nullable: true })
-    public privacyInfo: string[];
+    public uniqueAboutPlace: string[];
 
     @Prop({ required: false, nullable: true, type: [{ type: Types.ObjectId, ref: 'User' + User.name }] })
     public members: User[];
