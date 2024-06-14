@@ -1,10 +1,43 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsArray, IsBoolean, IsDateString, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsOptional, IsString, IsNumber } from 'class-validator';
 
 export class RoomDto {
     @ApiProperty()
     @IsString()
-    public title: string;
+    public owner: string;
+
+    @ApiProperty()
+    @IsString()
+    public type: string;
+
+    @ApiProperty()
+    @IsString()
+    public streetName: string;
+
+    @ApiProperty()
+    @IsNumber()
+    public houseNumber: number;
+
+    @ApiPropertyOptional()
+    @IsString()
+    @IsOptional()
+    public bus: string;
+
+    @ApiProperty()
+    @IsString()
+    public city: string;
+
+    @ApiProperty()
+    @IsString()
+    public postalCode: string;
+
+    @ApiProperty()
+    @IsString()
+    public place: string;
+
+    @ApiProperty()
+    @IsString()
+    public country: string;
 
     @ApiPropertyOptional()
     @IsString()
@@ -12,79 +45,46 @@ export class RoomDto {
     public description: string;
 
     @ApiPropertyOptional()
-    @IsString()
+    @IsArray()
     @IsOptional()
-    public extraInfo: string;
-
-    @ApiProperty()
-    @IsBoolean()
-    public furnished: boolean;
-
-    @ApiPropertyOptional()
-    @IsNumber()
-    @IsOptional()
-    public houseSize: number;
-
-    @ApiProperty()
-    @IsNumber()
-    public amountOfRooms: number;
-
-    @ApiProperty()
-    @IsNumber()
-    public PeopleLivingHere: number;
-
-    @ApiProperty()
-    @IsBoolean()
-    public areTherePets: boolean;
-
-    @ApiPropertyOptional()
-    @IsString()
-    @IsOptional()
-    public kindOfPets: string;
-
-    @ApiProperty()
-    @IsString()
-    public imageLink: string;
-
-    @ApiProperty()
-    @IsDateString()
-    public startDateAvailability: string;
-
-    @ApiProperty()
-    @IsDateString()
-    public endDateAvailability: string;
-
-    @ApiProperty()
-    @IsNumber()
-    public rentPrice: number;
-
-    @ApiProperty()
-    @IsNumber()
-    public additionalCost: number;
-
-    @ApiProperty()
-    @IsNumber()
-    public serviceCost: number;
-
-    @ApiProperty()
-    @IsNumber()
-    public deposit: number;
+    public householdDetails: string[];
 
     @ApiPropertyOptional()
     @IsArray()
     @IsOptional()
-    public idealAttendantInfo: string[];
+    public propertyDetails: string[];
 
     @ApiPropertyOptional()
     @IsArray()
     @IsOptional()
-    public privacyInfo: string[];
+    public sharedSpaces: string[];
 
-    @ApiProperty()
+    @ApiPropertyOptional()
     @IsArray()
+    @IsOptional()
+    public roomDetails: string[];
+
+    @ApiPropertyOptional()
+    @IsArray()
+    @IsOptional()
+    public personalRoomDetails: string[];
+
+    @ApiPropertyOptional()
+    @IsArray()
+    @IsOptional()
+    public uniqueAboutPlace: string[];
+
+    @ApiPropertyOptional()
+    @IsArray()
+    @IsOptional()
+    public images: string[];
+
+    @ApiPropertyOptional()
+    @IsArray()
+    @IsOptional()
     public members: string[];
 
-    @ApiProperty()
-    @IsString()
-    public owner: string;
+    public constructor(partial: Partial<RoomDto>) {
+        Object.assign(this, partial);
+    }
 }
