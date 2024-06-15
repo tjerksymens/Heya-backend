@@ -39,8 +39,8 @@ export class SaveUserDto {
     public rentsRoomId?: string;
 
     @ApiPropertyOptional()
-    @IsString()
-    public room?: string;
+    @IsArray()
+    public room?: string[];
 
     @ApiPropertyOptional()
     @IsArray()

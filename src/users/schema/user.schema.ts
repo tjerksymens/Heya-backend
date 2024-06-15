@@ -34,7 +34,7 @@ export class User extends Document {
     public rentsRoomId: Room;
 
     @Prop({ required: false, nullable: true, type: Types.ObjectId, ref: 'Room' })
-    public room: Room;
+    public room: Room[];
 
     @Prop({ required: false, nullable: true })
     public userStayInfo: string[];
