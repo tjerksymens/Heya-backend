@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Get, Post, Put, Delete, Param, Patch } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Get, Post, Put, Delete, Param, Patch, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { RoomDto } from '../dto';
 import { RoomService } from '../services';
@@ -10,8 +10,12 @@ export class RoomController {
     @Get()
     @ApiOperation({ summary: 'Get all rooms' })
     @ApiResponse({ status: HttpStatus.OK, type: [RoomDto] })
-    public getAllRooms() {
-        return this.roomService.getAllRooms();
+    public getAllRooms(@Query('city') city: string, @Query('keywords') keywords: string) {
+        const filters = {
+            city,
+            keywords: keywords ? keywords.split(',') : [],
+        };
+        return this.roomService.getAllRooms(filters);
     }
 
     @Get(':id')

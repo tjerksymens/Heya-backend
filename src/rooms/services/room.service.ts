@@ -8,14 +8,26 @@ import { Room } from '../schema';
 export class RoomService {
     public constructor(@InjectModel(Room.name) private roomModel: Model<Room>) {}
 
-    public async getAllRooms(): Promise<Room[]> {
-        return this.roomModel.find().exec();
+    public async getAllRooms(filters?: any): Promise<Room[]> {
+        const { city, keywords } = filters;
+        let query = this.roomModel.find();
+
+        if (city) {
+            query = query.where('city').equals(city);
+        }
+
+        if (keywords && keywords.length > 0) {
+            const keywordRegex = new RegExp(keywords.join('|'), 'i');
+            query = query.where('description').regex(keywordRegex);
+        }
+
+        return query.exec();
     }
 
     public async getRoom(id: string): Promise<Room> {
         const room = await this.roomModel.findById(id).exec();
         if (!room) {
-            throw new NotFoundException(`room with ID ${id} not found.`);
+            throw new NotFoundException(`Room with ID ${id} not found.`);
         }
         return room;
     }
@@ -28,7 +40,7 @@ export class RoomService {
     public async updateRoom(id: string, roomData: RoomDto): Promise<Room> {
         const updatedRoom = await this.roomModel.findByIdAndUpdate(id, roomData, { new: true }).exec();
         if (!updatedRoom) {
-            throw new NotFoundException(`room with ID ${id} not found.`);
+            throw new NotFoundException(`Room with ID ${id} not found.`);
         }
         return updatedRoom;
     }
@@ -36,7 +48,7 @@ export class RoomService {
     public async updateRoomPart(id: string, roomData: RoomDto): Promise<Room> {
         const updatedRoom = await this.roomModel.findByIdAndUpdate(id, roomData, { new: true }).exec();
         if (!updatedRoom) {
-            throw new NotFoundException(`room with ID ${id} not found.`);
+            throw new NotFoundException(`Room with ID ${id} not found.`);
         }
         return updatedRoom;
     }
