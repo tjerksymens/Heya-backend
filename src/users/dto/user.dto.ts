@@ -36,6 +36,10 @@ export class SaveUserDto {
 
     @ApiPropertyOptional()
     @IsString()
+    public rentsRoomId?: string;
+
+    @ApiPropertyOptional()
+    @IsString()
     public room?: string;
 
     @ApiPropertyOptional()
