@@ -97,17 +97,17 @@ export class RoomDto {
     @ApiPropertyOptional()
     @IsArray()
     @IsOptional()
-    public pricing: string;
+    public pricing: string[];
 
     @ApiPropertyOptional()
     @IsArray()
     @IsOptional()
-    public idealAttendant: string;
+    public idealAttendant: string[];
 
     @ApiPropertyOptional()
     @IsArray()
     @IsOptional()
-    public privacy: string;
+    public privacy: string[];
 
     @ApiPropertyOptional()
     @IsString()

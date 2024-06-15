@@ -1,9 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 import { User } from '../../users/schema';
+
 @Schema()
 export class Room extends Document {
-    @Prop({ required: true, type: Types.ObjectId, ref: 'User' + User.name })
+    @Prop({ required: true, type: Types.ObjectId, ref: User.name })
     public owner: User;
 
     @Prop({ required: true })
@@ -54,7 +55,7 @@ export class Room extends Document {
     @Prop({ required: false, nullable: true })
     public images: string[];
 
-    @Prop({ required: false, nullable: true, type: [{ type: Types.ObjectId, ref: 'User' + User.name }] })
+    @Prop({ required: false, nullable: true, type: [{ type: Types.ObjectId, ref: User.name }] })
     public members: User[];
 
     @Prop({ required: false, nullable: true, type: 'date' })
