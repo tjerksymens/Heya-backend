@@ -44,7 +44,7 @@ export class SaveUserDto {
 
     @ApiPropertyOptional()
     @IsString()
-    public role: string;
+    public role?: string;
 
     @ApiPropertyOptional()
     @IsArray()

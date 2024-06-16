@@ -34,12 +34,14 @@ export class UserService {
         if (existingUser) {
             return this.updateUser(existingUser.id, userData);
         } else {
+            if (!userData.role) {
+                userData.role = 'student';
+            }
             const newUser = new this.userModel(userData);
             const createdUser = await newUser.save();
             return createdUser.toObject();
         }
     }
-
     public async updateUser(id: string, userData: UserDto): Promise<UserDto> {
         const updatedUser = await this.userModel.findByIdAndUpdate(id, userData, { new: true }).exec();
         if (!updatedUser) {
