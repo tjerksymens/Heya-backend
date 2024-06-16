@@ -75,6 +75,9 @@ export class Room extends Document {
 
     @Prop({ required: false, nullable: true, type: 'date' })
     public meeting: string;
+
+    @Prop({ required: true, default: true })
+    public spotlight: boolean;
 }
 
 export type RoomDocument = Room & Document;

@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsArray, IsOptional, IsString, IsNumber } from 'class-validator';
+import { IsArray, IsOptional, IsString, IsNumber, IsBoolean } from 'class-validator';
 
 export class RoomDto {
     @ApiProperty()
@@ -113,6 +113,11 @@ export class RoomDto {
     @IsString()
     @IsOptional()
     public meeting: string;
+
+    @ApiPropertyOptional()
+    @IsBoolean()
+    @IsOptional()
+    public spotlight: boolean;
 
     public constructor(partial: Partial<RoomDto>) {
         Object.assign(this, partial);
