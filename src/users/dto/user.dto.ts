@@ -43,6 +43,10 @@ export class SaveUserDto {
     public room?: string[];
 
     @ApiPropertyOptional()
+    @IsString()
+    public role: string;
+
+    @ApiPropertyOptional()
     @IsArray()
     public userStayInfo?: string[];
 

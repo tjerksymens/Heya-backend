@@ -36,6 +36,9 @@ export class User extends Document {
     @Prop({ required: false, nullable: true, type: Types.ObjectId, ref: 'Room' })
     public room: Room[];
 
+    @Prop({ required: true, default: 'student' })
+    public role: string;
+
     @Prop({ required: false, nullable: true })
     public userStayInfo: string[];
 
